@@ -37,7 +37,7 @@ for j in range(M):
 for iter in range(100):  # Número de iteraciones
     for i in range(1, N):
         for j in range(1, M):
-            w[i][j] = (k**2*(w[i+1][j]+w[i-1][j]) + h**2*(w[i][j+1]+w[i][j-1]) - 2*h**2*k**2*f(i,j)) / (2*(h**2 + k**2))
+            w[i][j] = (k**2*(w[i+1][j]+w[i-1][j]) + h**2*(w[i][j+1]+w[i][j-1]) - 2*h**2*k**2*f(i,j)) / (2*(h**2 + k**2) + h**2*k**2*(l**2))
 
 # Crear una malla de coordenadas para graficar
 x = np.linspace(a, b, N+1)
