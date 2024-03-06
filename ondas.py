@@ -8,18 +8,28 @@ N = int(input('Ingresar valor de N: '))
 M = int(input('Ingresar valor de M: '))
 b = float(input('Ingresar valor de b: '))
 d = float(input('Ingresar valor de d: '))
-v = float(input('velocidad: '))
-
-# Cálculo de pasos
 h = b / N
 k = d / M
+vel_max = h/k
+print('Velocidad máxima: ', vel_max)
+v = float(input('velocidad: '))
 
 # Inicialización de la matriz w con dimensiones correctas
 w = np.zeros((N+1, M+1))  # +1 para incluir los bordes
 
 # Función f(i, j) como fuente
+'''Cuando tenemos una fuente en varias partes
 def f(x):
-    return x*(b-x)
+    if x < b/2:
+        return x
+    else:
+        return b-x'''
+
+def f(x):
+    if 1<x<3:
+        return 1
+    else:
+        return 0
 
 # Función g(i) para la condición inicial
 def g(x):
@@ -31,9 +41,12 @@ for i in range(N):
    
 
 for j in range(M):
-    w[0][j] =  0  #Frontera izquierda, recordar que t_i = jk
+    w[0][j] =0 #Frontera izquierda, recordar que t_i = jk
     w[N][j] = 0  # Frontera derecha
-
+''' Para que la onda no sea estacionaria 
+    w[0][j] = 3*np.sin(k*j) #Frontera izquierda, recordar que t_i = jk
+    w[N][j] = np.sin(k*j)  # Frontera derecha
+'''
 # Iteraciones para la solución
 for j in range(1, M):
     for i in range(1, N):
