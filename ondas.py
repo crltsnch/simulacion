@@ -70,5 +70,4 @@ ax.set_zlabel('w')
 
 # Añadir barra de colores para la escala
 fig.colorbar(surf)
-plt.savefig('EDPPoisson1.png')
 plt.show()
