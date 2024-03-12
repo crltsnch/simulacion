@@ -17,8 +17,8 @@ v = float(input('velocidad: '))
 # Inicialización de la matriz w con dimensiones correctas
 w = np.zeros((N+1, M+1))  # +1 para incluir los bordes
 
-# Función f(i, j) como fuente
-'''Cuando tenemos una fuente en varias partes
+# Función f(i, j)
+'''Cuando tenemos una funcion en varias partes
 def f(x):
     if x < b/2:
         return x
