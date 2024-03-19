@@ -13,7 +13,7 @@ k = d / M
 alfa_max = h/((k*2)**0.5)
 print('Alfa máximo: ', alfa_max)
 alfa = float(input('Ingresar valor de alfa: '))
-
+l = (alfa**2)*k/(h**2)
 
 
 # Inicialización de la matriz w con dimensiones correctas
@@ -26,10 +26,10 @@ def f(x):
         return 1
     else:
         return 0
-
-'''def f(x):
-    return np.exp(-(h*i-b/2)**2)'''
-
+'''
+def f(x):
+    return np.exp(-(h*i-b/2)**2)
+'''
 
 for i in range(N):
     w[i][0] = f(i*h)  # Frontera inferior
@@ -43,9 +43,11 @@ for j in range(M):
     w[N][j] = np.sin(k*j)  # Frontera derecha
 '''
 # Iteraciones para la solución
-for j in range(M):
-    for i in range(1, N):
-        w[i][j+1] = (1-2*k*(alfa/h)**2)*w[i][j] + (alfa**2)*(k/(h**2))*(w[i+1][j]+w[i-1][j])
+for iter in range(100):
+    for j in range(1, M):
+        for i in range(1, N):
+            w[i][j] = (l*(w[i+1][j]+w[i-1][j]) + w[i][j-1]) / (1+2*l)
+
 
 # Crear una malla de coordenadas para graficar
 x = np.linspace(0, b, N+1)
