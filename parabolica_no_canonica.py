@@ -47,7 +47,9 @@ for iter in range(100):
     for j in range(1, M):
         for i in range(1, N):
             #w[i][j] = ((k/(h**2))*(w[i+1][j]+w[i-1][j]) + (1+h*i)*w[i][j-1]) / (1+h*i+2*(k/(h**2)))
-            w[i][j] = (k*(w[i+1][j]+w[i-1][j]) + (1+h*i)*w[i][j-1]*h**2) / (2*k+(1+h*i)*h**2-(h**2)*k)
+            #w[i][j] = (k*(w[i+1][j]+w[i-1][j]) + (1+h*i)*w[i][j-1]*h**2) / (2*k+(1+h*i)*h**2-(h**2)*k)
+            w[i][j] = (k*(w[i+1][j]+w[i-1][j]) + (1+h*i)*w[i][j-1]*h**2) / (2*k+(1+h*i)*h**2-(h**2)*k*(h*i))
+
 
 
 # Crear una malla de coordenadas para graficar
