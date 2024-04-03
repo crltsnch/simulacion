@@ -10,9 +10,6 @@ b = float(input('Ingresar valor de b: '))
 d = float(input('Ingresar valor de d: '))
 h = b / N
 k = d / M
-alfa_max = h/((k*2)**0.5)
-print('Alfa máximo: ', alfa_max)
-alfa = float(input('Ingresar valor de alfa: '))
 
 
 # Inicialización de la matriz w con dimensiones correctas
@@ -28,7 +25,7 @@ w = np.zeros((N+1, M+1))  # +1 para incluir los bordes
 
 def f(x):
     #return np.exp(-(h*i-2.5)**2)
-    return np.exp(-(h*i-2.5)**2)
+    return np.exp(-((h*i-0.25)**2))
 
 
 for i in range(N):
@@ -48,9 +45,10 @@ for iter in range(100):
         for i in range(1, N):
             #w[i][j] = ((k/(h**2))*(w[i+1][j]+w[i-1][j]) + (1+h*i)*w[i][j-1]) / (1+h*i+2*(k/(h**2)))
             #w[i][j] = (k*(w[i+1][j]+w[i-1][j]) + (1+h*i)*w[i][j-1]*h**2) / (2*k+(1+h*i)*h**2-(h**2)*k)
-            w[i][j] = (k*(w[i+1][j]+w[i-1][j]) + (1+h*i)*w[i][j-1]*h**2) / (2*k+(1+h*i)*h**2-(h**2)*k*(h*i))
+            #w[i][j] = (k*(w[i+1][j]+w[i-1][j]) + (1+h*i)*w[i][j-1]*h**2) / (2*k+(1+h*i)*h**2-(h**2)*k*(h*i))
+            w[i][j] = (2*(k**2)*(w[i+1][j]+w[i-1][j]) + (h**2)*2*(w[i][j+1]+w[i][j-1]) + h*k*(w[i+1][j+1]+w[i-1][j-1]-w[i-1][j+1]-w[i+1][j-1])) / (8*k**2)
 
-
+'''40, 400 para las parabólicas, 30 30 para las elipticas'''
 
 # Crear una malla de coordenadas para graficar
 x = np.linspace(0, b, N+1)
