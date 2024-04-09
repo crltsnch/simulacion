@@ -24,17 +24,18 @@ w = np.zeros((N+1, M+1))  # +1 para incluir los bordes
         return 1
     else:
         return 0'''
-
+'''
 def f(x):
     #return np.exp(-(h*i-2.5)**2)
-    return np.exp(-((h*i-0.25)**2))
+    return 10*(h*i)*(1-h*i)'''
 
 for i in range(N):
-    w[i][0] = f(i*h)  # Frontera inferior
+    w[i][0] = 10*(h*i)*(1-h*i) # Frontera inferior
+    w[i][M] = -5
    
 for j in range(M):
-    w[0][j] = 0  # Frontera izquierda, recordar que t_i = jk
-    w[N][j] = 0  # Frontera derecha
+    w[0][j] = 5*(-1+k*j)  # Frontera izquierda, recordar que t_i = jk
+    w[N][j] = 5*np.sin(2*np.pi*(-1+k*j)) # Frontera derecha
 
 ''' Para que la onda no sea estacionaria 
     w[0][j] = 3*np.sin(k*j) #Frontera izquierda, recordar que t_i = jk
@@ -48,7 +49,8 @@ for iter in range(100):  # Número de iteraciones
             #w[i][j] = ((k/(h**2))*(w[i+1][j]+w[i-1][j]) + (1+h*i)*w[i][j-1]) / (1+h*i+2*(k/(h**2)))
             #w[i][j] = (k*(w[i+1][j]+w[i-1][j]) + (1+h*i)*w[i][j-1]*h**2) / (2*k+(1+h*i)*h**2-(h**2)*k)
             #w[i][j] = (k*(w[i+1][j]+w[i-1][j]) + (1+h*i)*w[i][j-1]*h**2) / (2*k+(1+h*i)*h**2-(h**2)*k*(h*i))
-            w[i][j] = (2*(k**2)*(w[i+1][j]+w[i-1][j]) + (h**2)*2*(w[i][j+1]+w[i][j-1]) + h*k*(w[i+1][j+1]+w[i-1][j-1]-w[i-1][j+1]-w[i+1][j-1])) / (8*k**2)
+            #w[i][j] = (2*(k**2)*(w[i+1][j]+w[i-1][j]) + (h**2)*2*(w[i][j+1]+w[i][j-1]) + h*k*(w[i+1][j+1]+w[i-1][j-1]-w[i-1][j+1]-w[i+1][j-1])) / (8*k**2)
+            w[j][i] = ((-1 + j*k)*k*(2)*(w[j][i+1] + w[j][i-1]) - i*h*(3)*(w[j+1][i] + w[j-1][i]))/(2*((-1 + j*k)*k*(2) - i*h*(3)))
 
 
 '''40, 400 para las parabólicas, 30 30 para las elipticas'''
