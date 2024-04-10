@@ -2,6 +2,22 @@ import numpy as np
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 
+'''
+Derivada segunda:
+u_xx = (w[i+1][j] - 2*w[i][j] + w[i-1][j]) / h**2
+u_yy = (w[i][j+1] - 2*w[i][j] + w[i][j-1]) / k**2
+
+Derivada cruzada:
+u_xy = (w[i+1][j+1] + w[i-1][j-1] - w[i-1][j+1] - w[i+1][j-1]) / (4*h*k)
+
+Derivada simple de x:
+    - Progresivas: (w[i+1][j] - w[i][j]) / h
+    - Regresivas: (w[i][j] - w[i-1][j]) / h
+
+Derivada simple de y:
+    - Progresiva: (w[i][j+1] - w[i][j]) / k
+    - Regresiva: (w[i][j] - w[i][j-1]) / k
+'''
 
 # Entrada de parámetros
 N = int(input('Ingresar valor de N: '))
