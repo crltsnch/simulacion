@@ -34,8 +34,8 @@ for i in range(N):
     w[i][M] = -5
    
 for j in range(M):
-    w[0][j] = 5*(-1+k*j)  # Frontera izquierda, recordar que t_i = jk
-    w[N][j] = 5*np.sin(2*np.pi*(-1+k*j)) # Frontera derecha
+    w[0][j] = 0  # Frontera izquierda, recordar que t_i = jk
+    w[N][j] = 0 # Frontera derecha
 
 ''' Para que la onda no sea estacionaria 
     w[0][j] = 3*np.sin(k*j) #Frontera izquierda, recordar que t_i = jk
@@ -46,11 +46,12 @@ for j in range(M):
 for iter in range(100):  # Número de iteraciones
     for j in range(1, M):
         for i in range(1, N):
+            w[i][j] = (k*(w[i+1][j]+w[i-1][j]) + (h**2)*(1+h*i)*w[i][j-1]) / (2*k+(h**2)*(1+h*i))
             #w[i][j] = ((k/(h**2))*(w[i+1][j]+w[i-1][j]) + (1+h*i)*w[i][j-1]) / (1+h*i+2*(k/(h**2)))
             #w[i][j] = (k*(w[i+1][j]+w[i-1][j]) + (1+h*i)*w[i][j-1]*h**2) / (2*k+(1+h*i)*h**2-(h**2)*k)
             #w[i][j] = (k*(w[i+1][j]+w[i-1][j]) + (1+h*i)*w[i][j-1]*h**2) / (2*k+(1+h*i)*h**2-(h**2)*k*(h*i))
             #w[i][j] = (2*(k**2)*(w[i+1][j]+w[i-1][j]) + (h**2)*2*(w[i][j+1]+w[i][j-1]) + h*k*(w[i+1][j+1]+w[i-1][j-1]-w[i-1][j+1]-w[i+1][j-1])) / (8*k**2)
-            w[j][i] = ((-1 + j*k)*k*(2)*(w[j][i+1] + w[j][i-1]) - i*h*(3)*(w[j+1][i] + w[j-1][i]))/(2*((-1 + j*k)*k*(2) - i*h*(3)))
+            #w[j][i] = ((-1 + j*k)*k*(2)*(w[j][i+1] + w[j][i-1]) - i*h*(3)*(w[j+1][i] + w[j-1][i]))/(2*((-1 + j*k)*k*(2) - i*h*(3)))
 
 
 '''40, 400 para las parabólicas, 30 30 para las elipticas'''
